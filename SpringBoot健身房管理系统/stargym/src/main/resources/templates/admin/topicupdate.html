@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>话题编辑-软帝CRM</title>
+<link rel="stylesheet" type="text/css" href="/css/css.css" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+</head>
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="/img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+					href="#">公共管理</a>&nbsp;-</span>&nbsp;话题编辑
+			</div>
+		</div>
+		<div class="page ">
+			<form action="updateCoaches.hm" method="post">
+			<!-- 上传广告页面样式 -->
+			<div class="banneradd bor">
+				<div class="baTopNo">
+					<span>添加教练</span>
+				</div>
+				<div class="baBody">
+					<input type="hidden" th:value="${coaches.id}" name="id"/>
+					<div class="bbD">
+						头像：<input type="file"  name="img" />
+					</div>
+					<div class="bbD">
+						<img src="/images/_coach-full-1.jpg" style="width: 100px;height: 100px">
+					</div>
+					<div class="bbD">
+						姓名：<input type="text" class="input3" name="name" th:value="${coaches.name}"/>
+					</div>
+					<div class="bbD">
+						年龄：<input type="text" class="input3"  name="age" th:value="${coaches.age}"/>
+					</div>
+					<div class="bbD">
+						性别：<input type="radio" name="gender"   value="男" checked="checked"/> 男&nbsp; &nbsp;&nbsp;&nbsp;
+						<input type="radio" name="gender"  value="女" /> 女
+					</div>
+					<div class="bbD">
+						经验：<input type="text" class="input3" name="experience" th:value="${coaches.experience}"/> 年
+					</div>
+					<div class="bbD">
+						擅长：<input type="text" class="input3"  name="specialization" th:value="${coaches.specialization}"/>
+					</div>
+					<div class="bbD">
+						简介：
+						<div class="btext">
+							<textarea class="text2" name="des" th:text="${coaches.des}"></textarea>
+						</div>
+					</div>
+
+
+					<div class="bbD">
+						<p class="bbDP">
+							<button class="btn_ok btn_yes" href="#">提交</button>
+							<a class="btn_ok btn_no" href="#">取消</a>
+						</p>
+					</div>
+
+
+				</div>
+
+			</div>
+			</form>
+			<!-- 上传广告页面样式end -->
+		</div>
+	</div>
+
+</body>
+</html>

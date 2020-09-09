@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.softeem.stargym.mapper.CoachesMapper">
+  <resultMap id="BaseResultMap" type="com.softeem.stargym.entity.Coaches">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="experience" jdbcType="INTEGER" property="experience" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="specialization" jdbcType="VARCHAR" property="specialization" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="des" jdbcType="VARCHAR" property="des" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, age, experience, gender, specialization, img, des
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coaches
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from coaches
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.softeem.stargym.entity.Coaches">
+    insert into coaches (id, name, age, 
+      experience, gender, specialization, 
+      img, des)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{experience,jdbcType=INTEGER}, #{gender,jdbcType=VARCHAR}, #{specialization,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.softeem.stargym.entity.Coaches">
+    insert into coaches
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="experience != null">
+        experience,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="specialization != null">
+        specialization,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="des != null">
+        des,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="experience != null">
+        #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="specialization != null">
+        #{specialization,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        #{des,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.softeem.stargym.entity.Coaches">
+    update coaches
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="experience != null">
+        experience = #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="specialization != null">
+        specialization = #{specialization,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        des = #{des,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.softeem.stargym.entity.Coaches">
+    update coaches
+    set name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      experience = #{experience,jdbcType=INTEGER},
+      gender = #{gender,jdbcType=VARCHAR},
+      specialization = #{specialization,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      des = #{des,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

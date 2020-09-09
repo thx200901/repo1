@@ -1,0 +1,89 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>stargym</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Eminent Login Form Widget Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- font files -->
+<!--<link href='//fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>-->
+<!--<link href='//fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>-->
+<!-- /font files -->
+<!-- css files -->
+
+    <link href="/css/bootstrap-grid.css" rel="stylesheet" />
+    <link href="/css/font-awesome.css" rel="stylesheet" />
+    <link href="/css/zoomslider.css" rel="stylesheet" />
+    <link href="/css/swiper.css" rel="stylesheet" />
+    <link href="/css/swipebox.css" rel="stylesheet" />
+    <link href="/css/style-pink.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/jquery-ui.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700%7CFira+Sans:400,500,600,700,800,900" rel="stylesheet" />
+    <link href="/css/style.css" rel='stylesheet' type='text/css' media="all" />
+    <!-- /css files -->
+</head>
+<body>
+<h1><img src="/images/logo-pink.png"></h1>
+<div class="form-w3ls">
+    <ul class="tab-group cl-effect-4">
+        <li class="tab active"><a href="#signin-agile"><b>登  录</b></a></li>
+		<li class="tab"><a href="#signup-agile"><b>注  册</b></a></li>        
+    </ul>
+    <div class="tab-content">
+        <div id="signin-agile">   
+			<form action="doLogin.hm" method="post">
+				
+				<p class="header"><b>用户名|邮箱|电话</b></p>
+				<input type="text" name="account" value="请输入账户" onfocus="this.value = '';" >
+				
+				<p class="header">密   码</p>
+				<input type="password" name="password" value="Password" onfocus="this.value = '';" >
+				
+				<input type="checkbox" id="brand" value="">
+				<label for="brand"><span></span> 记住密码?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: darkred;font-weight: bold" th:text="${msg}"></span>
+				
+				<input type="submit" class="sign-in" value="登 录">
+				
+				<ul class="links">
+					<li class="pass-w3ls"><a href="#">忘记密码？</a></li>
+				</ul>
+			</form>
+		</div>
+		<div id="signup-agile">   
+			<form action="#" method="post">
+				
+				<p class="header">用户名</p>
+				<input type="text" name="username" placeholder="请输入用户名" onfocus="this.value = '';" >
+				
+				<p class="header">电话号码</p>
+				<input type="tel" name="phone" placeholder="请输入密码" onfocus="this.value = '';" >
+			
+				<p class="header">邮箱地址</p>
+				<input type="email" name="email" placeholder="Email@address.com" onfocus="this.value = '';" >
+				
+				<p class="header">密码</p>
+				<input type="password" name="password" placeholder="Password" onfocus="this.value = '';" >
+				
+				<p class="header">重复密码</p>
+				<input type="password" name="password" placeholder="Confirm Password" onfocus="this.value = '';" >
+				
+				<input type="submit" class="register" value="注册">
+			</form>
+		</div> 
+    </div><!-- tab-content -->
+</div> <!-- /form -->
+<footer style="position: relative;bottom: 0;width: 100%;margin-top: 50px">
+    <div class="container" style="margin-top: 10px">
+        Copyright &copy; 2020.软帝学院.学生自主设计项目
+        <a href="#">天道酬勤~没有人能随便成功，加油！</a>
+        <a href="#" class="go-top fa fa-arrow-up hidden-xs hidden-ms"><span>回到顶部</span></a>
+    </div>
+</footer>
+
+<!-- js files -->
+<script src='/js/jquery.min.js'></script>
+<script src="/js/index.js"></script>
+<!-- /js files -->
+</body>
+</html>

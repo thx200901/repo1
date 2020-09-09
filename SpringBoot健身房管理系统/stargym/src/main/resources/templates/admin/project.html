@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>话题管理-软帝CRM</title>
+    <link rel="stylesheet" type="text/css" href="/css/css.css"/>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="js/page.js" ></script> -->
+</head>
+
+<body>
+<div id="pageAll">
+    <div class="pageTop">
+        <div class="page">
+            <img src="/img/coin02.png"/><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+                href="#">办公管理</a>&nbsp;-</span>&nbsp;健身项目管理
+        </div>
+    </div>
+
+    <div class="page">
+        <!-- topic页面样式 -->
+        <div class="topic">
+            <div class="conform">
+                <form action="selectProject" method="post">
+                    <!--<div class="cfD">-->
+                    <!--姓名：<input class="timeInput" type="text" />&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;<input-->
+                    <!--class="timeInput" type="text" /> 姓名：<select><option>1年以内</option></select>-->
+                    <!--审核状态：<label><input type="radio" checked="checked"-->
+                    <!--name="styleshoice1" />&nbsp;未审核</label> <label><input-->
+                    <!--type="radio" name="styleshoice1" />&nbsp;已通过</label> <label class="lar"><input-->
+                    <!--type="radio" name="styleshoice1" />&nbsp;不通过</label>-->
+                    <!--</div>-->
+                    <div class="cfD">
+
+                        <input class="addUser" type="text" placeholder="姓名" name="name"/>
+                        <button class="button">搜索</button>
+                        <a class="addA addA1" href="javascript:;" th:onclick="'javascript:showProject()'">查询全部</a>
+                        <a class="addA addA1" href="projectadd.hm">添加科目+</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- topic表格 显示 -->
+            <div class="conShow">
+                <table border="1" cellspacing="0" cellpadding="0" style="width: 100%">
+                    <tr>
+                        <td width="5%" class="tdColor tdC">
+                            <input type="checkbox"/>
+                        </td>
+                        <td width="5%" class="tdColor tdC">序号</td>
+                        <td width="10%" class="tdColor">健身项目名称</td>
+                        <td width="10%" class="tdColor">项目价格</td>
+                        <td width="15%" class="tdColor">des</td>
+                        <td width="15%" class="tdColor">操作</td>
+                    </tr>
+
+                    <tr th:each="p ,projectStat:${allProject}">
+                        <td><input type="checkbox"/></td>
+                        <td th:text="${projectStat.index+1}">1</td>
+                        <td th:text="${p.name}"></td>
+                        <td th:text="${p.price}"></td>
+                        <td th:text="${p.des}"></td>
+
+                        <td>
+                            <a href="javascript:;" th:onclick="'javascript:loadProject('+${p.id}+')'"><img
+                                    class="operation"
+                                    src="/img/update.png"></a>
+                            <a href="javascript:;" th:onclick="'javascript:deleteProject('+${p.id}+')'"><img
+                                    class="operation delban"
+                                    src="/img/delete.png"></a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="paging">此处是分页</div>
+            </div>
+            <!-- topic 表格 显示 end-->
+        </div>
+        <!-- topic页面样式end -->
+    </div>
+</div>
+
+
+<!-- 删除弹出框 -->
+<div class="banDel">
+    <div class="delete">
+        <div class="close">
+            <a><img src="/img/shanchu.png"/></a>
+        </div>
+        <p class="delP1">你确定要删除此条记录吗？</p>
+        <p class="delP2">
+            <a href="#" class="ok yes">确定</a><a class="ok no">取消</a>
+        </p>
+    </div>
+</div>
+<!-- 删除弹出框  end-->
+
+</body>
+
+<script type="text/javascript">
+
+    function loadProject(id) {
+        window.location.href = "loadProject.hm?id=" + id;
+    }
+
+    function deleteProject(id) {
+        window.location.href = "deleteProject.hm?id=" + id;
+    }
+
+    function showProject() {
+        window.location.href = "toProject.hm";
+    }
+
+    // 广告弹出框
+    $(".delban").click(function () {
+        $(".banDel").show();
+    });
+    $(".close").click(function () {
+        $(".banDel").hide();
+    });
+    $(".no").click(function () {
+        $(".banDel").hide();
+    });
+    // 广告弹出框 end
+
+</script>
+</html>

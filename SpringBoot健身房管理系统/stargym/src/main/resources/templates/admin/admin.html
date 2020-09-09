@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理员管理-软帝CRM</title>
+<link rel="stylesheet" type="text/css" href="/css/css.css" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="js/page.js" ></script> -->
+</head>
+
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="/img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;-</span>&nbsp;管理员管理
+			</div>
+		</div>
+
+		<div class="page">
+			<!-- user页面样式 -->
+			<div class="connoisseur">
+				<div class="conform">
+					<form action="addAdmin.hm" method="post">
+						<div class="cfD">
+							<select class="userinput" id="adminRole" name="role" >
+								<option>请选择</option>
+								<!--<option value="超级管理员">超级管理员</option>-->
+								<!--<option value="讲师">讲师</option>-->
+								<!--<option value="销售">销售</option>-->
+							</select>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+							<input class="userinput" type="text" placeholder="输入用户名" id="adminUsername" name="username"/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+							<input class="userinput vpr" type="password" placeholder="输入用户密码" id="adminPassword" name="password"/>
+							<input class="userinput vpr" type="text" placeholder="输入真实姓名" id="adminName" name="name"/>
+							<br/><br/>
+							<button class="userbtn">添加</button>
+							<button class="userbtn">批量删除</button>
+						</div>
+					</form>
+				</div>
+				<!-- user 表格 显示 -->
+				<div class="conShow">
+					<table border="1" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="66px" class="tdColor tdC">
+								<input type="checkbox"  /> 
+							</td>
+							<td width="66px" class="tdColor tdC">序号</td>
+							<td width="335px" class="tdColor">管理角色</td>
+							<td width="400px" class="tdColor">用户名</td>
+							<td width="400px" class="tdColor">密码</td>
+							<td width="400px" class="tdColor">用户昵称</td>
+							<td width="530px" class="tdColor">添加时间</td>
+							<td width="400px" class="tdColor">添加人</td>
+							<td width="230px" class="tdColor">操作</td>
+						</tr>
+						<tr height="40px" th:each="admin ,adminStat:${admins}">
+							<td><input type="checkbox"  /></td>
+							<td th:text="${adminStat.index+1}"></td>
+							<td th:text="${admin.role}"></td>
+							<td th:text="${admin.username}"></td>
+							<td th:text="${admin.password}"></td>
+							<td th:text="${admin.name}"></td>
+							<td th:text="${#dates.format(admin.addTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+							<td th:text="${admin.doName}"></td>
+							<td><a href="javascript:;" th:onclick="'javascript:loadAdmin('+${admin.id}+')'"><img class="operation updateban"
+									src="/img/update.png" ></a>
+                               <a href="javascript:;" th:onclick="'javascript:deleteAdmin('+${admin.id}+')'"> <img class="operation delban" src="/img/delete.png"></td>
+						</tr>
+					</table>
+					<div class="paging">此处是分页</div>
+				</div>
+				<!-- user 表格 显示 end-->
+			</div>
+			<!-- user页面样式end -->
+		</div>
+
+	</div>
+
+
+	<!-- 删除弹出框 -->
+	<div class="banDel">
+		<div class="delete">
+			<div class="close">
+				<a><img src="/img/shanchu.png" /></a>
+			</div>
+			<p class="delP1">你确定要删除此条记录吗？</p>
+			<p class="delP2">
+				<a href="javascript:;" id="OK" class="ok yes">确定</a><a class="ok no">取消</a>
+			</p>
+		</div>
+	</div>
+	<!-- 删除弹出框  end-->
+	
+	<!--修改弹出框-->
+			<div class="banUpdate">
+				<div class="divUpdate">
+					<div class="closeUpdate">
+						修改管理员
+						<a><img src="/img/shanchu.png" class="upClose"/></a>
+					</div>
+					<div class="divForm">
+						<form method="post" action="/updateAdmin.hm">
+							<div >
+								<input type="hidden" id="admin_id" name="id"/>
+								<select class="userinput" id="admin_role" name="role" >
+									<option>请选择</option>
+									<!--<option value="超级管理员">超级管理员</option>-->
+									<!--<option value="讲师">讲师</option>-->
+									<!--<option value="销售">销售</option>-->
+								</select>
+							</div>
+							<div>
+								<input class="userinput" type="text" placeholder="输入用户名" id="admin_username" readonly="readonly" name="username"/>
+							</div>
+							<div>
+								<input class="userinput vpr" type="password" placeholder="输入用户密码" id="admin_password" name="password"/>
+							</div>
+							<div>
+								<button class="userbtn" id="okUpdate">确定</button>
+								<button class="userbtn" id="cancelUpdate">取消</button>
+							</div>
+						</form>
+
+					</div>
+			
+			
+		</div>
+		
+		
+	</div>
+
+	<!--修改弹出框-->
+	<div class="banUpdate" style="height: 400px">
+		<div class="divUpdate" style="height: 400px">
+			<div class="closeUpdate">
+				修改管理员
+				<a><img src="/img/shanchu.png" class="upClose"/></a>
+			</div>
+			<div class="divForm">
+				<form method="post" action="updateAdmin.hm">
+					<div >
+						<input type="hidden" id="update_id" name="id"/>
+						<span style="color:black">角色：</span><select class="userinput" id="update_role" name="role" >
+							<option>请选择</option>
+							<!--<option value="超级管理员">超级管理员</option>-->
+							<!--<option value="讲师">讲师</option>-->
+							<!--<option value="销售">销售</option>-->
+						</select>
+					</div>
+					<div>
+						<span style="color:black">账号：</span><input class="userinput" type="text" placeholder="输入用户名" id="update_username"  name="username"/>
+					</div>
+					<div>
+						<span style="color:black">密码：</span><input class="userinput vpr" type="password" placeholder="输入用户密码" id="update_password" name="password"/>
+					</div>
+					<div>
+						<span style="color:black">姓名：</span><input class="userinput vpr" type="text" placeholder="真实姓名" id="update_name" name="name"/>
+					</div>
+					<div>
+						<button class="userbtn" id="okUpdate">确定</button>
+						<button class="userbtn" id="cancelUpdate">取消</button>
+					</div>
+				</form>
+
+			</div>
+
+
+		</div>
+
+
+	</div>
+</body>
+
+<script type="text/javascript">
+    selectRole1();
+    // selectRole2();
+    function selectRole1() {
+        $("#adminRole").empty();
+        $.post(
+            "selectRoleType.hm",
+            function (data){
+                for(var i=0;i<data.length;i++){
+                    var name = data[i].name;
+                    $("#adminRole").append('<option value="'+name+'">'+name+'</option>');
+                }
+            }
+        );
+    }
+    function selectRole2(){
+        $("#update_role").empty();
+        $.post(
+            "selectRoleType.hm",
+            function (data){
+                for(var i=0;i<data.length;i++){
+                    var name = data[i].name;
+                    // alert(name);
+                    $("#update_role").append("<option value='"+name+"'>"+name+"</option>");
+                }
+            }
+        );
+    }
+    function loadAdmin(id){
+        alert(id);
+        selectRole2();
+        $.post(
+            "loadAdmin.hm",
+            {"id":id},
+            function(data) {
+                $("#update_id").val(data.id);
+                $("#update_username").val(data.username);
+                $("#update_password").val(data.password);
+                $("#update_name").val(data.name);
+                var options = $("#update_role option");
+                for(var i=0;i<options.length;i++){
+                    var role = data.role
+                    if(options[i].value==role){
+                        options[i].selected = true;
+                    }
+                }
+            }
+        );
+    }
+    function deleteAdmin(id) {
+        $("#OK").click(function (){
+            window.location.href = "deleteAdmin.hm?id="+id;
+        });
+    }
+
+// 广告弹出框
+$(".delban").click(function(){
+   $(".banDel").show();
+});
+
+$(".updateban").click(function(){
+	 $(".banUpdate").show();
+});
+$(".close").click(function(){
+  $(".banDel").hide();
+});
+$(".no").click(function(){
+  $(".banDel").hide();
+});
+$("#cancelUpdate").click(function(){
+	$(".banUpdate").hide();
+});
+$(".upClose").click(function(){
+	$(".banUpdate").hide();
+});
+// 广告弹出框 end
+</script>
+</html>

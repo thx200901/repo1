@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.softeem.stargym.mapper.RechargeMapper">
+  <resultMap id="BaseResultMap" type="com.softeem.stargym.entity.Recharge">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="recharge_qq" jdbcType="VARCHAR" property="rechargeQq" />
+    <result column="recharge_name" jdbcType="VARCHAR" property="rechargeName" />
+    <result column="recharge_time" jdbcType="TIMESTAMP" property="rechargeTime" />
+    <result column="recharge_money" jdbcType="DOUBLE" property="rechargeMoney" />
+    <result column="do_name" jdbcType="VARCHAR" property="doName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, recharge_qq, recharge_name, recharge_time, recharge_money, do_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recharge
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from recharge
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.softeem.stargym.entity.Recharge">
+    insert into recharge (id, recharge_qq, recharge_name, 
+      recharge_time, recharge_money, do_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{rechargeQq,jdbcType=VARCHAR}, #{rechargeName,jdbcType=VARCHAR}, 
+      #{rechargeTime,jdbcType=TIMESTAMP}, #{rechargeMoney,jdbcType=DOUBLE}, #{doName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.softeem.stargym.entity.Recharge">
+    insert into recharge
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="rechargeQq != null">
+        recharge_qq,
+      </if>
+      <if test="rechargeName != null">
+        recharge_name,
+      </if>
+      <if test="rechargeTime != null">
+        recharge_time,
+      </if>
+      <if test="rechargeMoney != null">
+        recharge_money,
+      </if>
+      <if test="doName != null">
+        do_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="rechargeQq != null">
+        #{rechargeQq,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeName != null">
+        #{rechargeName,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeTime != null">
+        #{rechargeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rechargeMoney != null">
+        #{rechargeMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="doName != null">
+        #{doName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.softeem.stargym.entity.Recharge">
+    update recharge
+    <set>
+      <if test="rechargeQq != null">
+        recharge_qq = #{rechargeQq,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeName != null">
+        recharge_name = #{rechargeName,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeTime != null">
+        recharge_time = #{rechargeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rechargeMoney != null">
+        recharge_money = #{rechargeMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="doName != null">
+        do_name = #{doName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.softeem.stargym.entity.Recharge">
+    update recharge
+    set recharge_qq = #{rechargeQq,jdbcType=VARCHAR},
+      recharge_name = #{rechargeName,jdbcType=VARCHAR},
+      recharge_time = #{rechargeTime,jdbcType=TIMESTAMP},
+      recharge_money = #{rechargeMoney,jdbcType=DOUBLE},
+      do_name = #{doName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

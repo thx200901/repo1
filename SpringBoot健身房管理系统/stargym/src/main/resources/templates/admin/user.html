@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>用户管理-软帝CRM</title>
+    <link rel="stylesheet" type="text/css" href="/css/css.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="js/page.js" ></script> -->
+</head>
+
+<body>
+<div id="pageAll">
+    <div class="pageTop">
+        <div class="page">
+            <img src="/img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;-</span>&nbsp;用户管理
+        </div>
+    </div>
+
+    <div class="page">
+        <!-- user页面样式 -->
+        <div class="connoisseur">
+            <div class="conform">
+                <form action="selectUser" method="post">
+                    <div class="cfD">
+                        <input class="addUser" type="text" placeholder="输入" />
+                        <button class="button">搜索</button>
+                        <a class="addA addA1" href="useradd.html">添加用户+</a>
+                        <a class="addA addA1" href="javascript:;">批量删除用户</a>
+                    </div>
+                </form>
+            </div>
+            <!-- user 表格 显示 -->
+            <div class="conShow">
+                <table border="1" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="66px" class="tdColor tdC">
+                            <input type="checkbox"  />
+                        </td>
+                        <td width="110px" class="tdColor tdC">序号</td>
+                        <td width="255px" class="tdColor">用户名</td>
+                        <td width="250px" class="tdColor">密码</td>
+                        <td width="160px" class="tdColor">姓名</td>
+                        <td width="120px" class="tdColor">性别</td>
+                        <td width="220px" class="tdColor">余额</td>
+                        <td width="330px" class="tdColor">生日</td>
+                        <td width="130px" class="tdColor">等级</td>
+                        <td width="180px" class="tdColor">电话</td>
+                        <td width="280px" class="tdColor">电子邮箱</td>
+                        <td width="330px" class="tdColor">添加时间</td>
+                        <td width="130px" class="tdColor">核实</td>
+                        <td width="220px" class="tdColor">操作</td>
+                    </tr>
+                    <tr height="40px" th:each="user,userStat:${allUser}">
+                        <td><input type="checkbox"  /></td>
+                        <td th:text="${userStat.index+1}"></td>
+                        <td th:text="${user.username}"></td>
+                        <td th:text="${user.password}"></td>
+                        <td th:text="${user.name}"></td>
+                        <td th:text="${user.gendar}"></td>
+                        <td th:text="${user.money}"></td>
+                        <td th:text="${#dates.format(user.birthday,'yyyy-MM-dd HH:mm:ss')}"></td>
+                        <td th:text="${user.level}"></td>
+                        <td th:text="${user.phone}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${#dates.format(user.addTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                        <td th:text="${user.isverify}"></td>
+                        <td><a href="javascript:;" th:onclick="'javascript:loadUser('+${user.id}+')'"><img class="operation updateban"
+                                                                                                             src="/img/update.png" ></a>
+                            <a href="javascript:;" th:onclick="'javascript:deleteUser('+${user.id}+')'"> <img class="operation delban" src="/img/delete.png"></td>
+                    </tr>
+                </table>
+                <div class="paging">此处是分页</div>
+            </div>
+            <!-- user 表格 显示 end-->
+        </div>
+        <!-- user页面样式end -->
+    </div>
+
+</div>
+
+
+<!-- 删除弹出框 -->
+<div class="banDel">
+    <div class="delete">
+        <div class="close">
+            <a><img src="/img/shanchu.png" /></a>
+        </div>
+        <p class="delP1">你确定要删除此条记录吗？</p>
+        <p class="delP2">
+            <a href="javascript:;" id="OK" class="ok yes">确定</a><a class="ok no">取消</a>
+        </p>
+    </div>
+</div>
+<!-- 删除弹出框  end-->
+
+<!--&lt;!&ndash;修改弹出框&ndash;&gt;-->
+<!--<div class="banUpdate">-->
+    <!--<div class="divUpdate">-->
+        <!--<div class="closeUpdate">-->
+            <!--修改用户-->
+            <!--<a><img src="/img/shanchu.png" class="upClose"/></a>-->
+        <!--</div>-->
+        <!--<div class="divForm">-->
+            <!--<form method="post" action="/updateUser.hm">-->
+                <!--<div >-->
+                    <!--<input type="hidden" id="admin_id" name="id"/>-->
+                    <!--<select class="userinput" id="admin_role" name="role" >-->
+                        <!--<option>请选择</option>-->
+                        <!--&lt;!&ndash;<option value="超级管理员">超级管理员</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option value="讲师">讲师</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option value="销售">销售</option>&ndash;&gt;-->
+                    <!--</select>-->
+                <!--</div>-->
+                <!--<div>-->
+                    <!--<input class="userinput" type="text" placeholder="输入用户名" id="admin_username"  name="username"/>-->
+                <!--</div>-->
+                <!--<div>-->
+                    <!--<input class="userinput vpr" type="password" placeholder="输入用户密码" id="admin_password" name="password"/>-->
+                <!--</div>-->
+                <!--<div>-->
+                    <!--<button class="userbtn" id="okUpdate">确定</button>-->
+                    <!--<button class="userbtn" id="cancelUpdate">取消</button>-->
+                <!--</div>-->
+            <!--</form>-->
+
+        <!--</div>-->
+
+
+    <!--</div>-->
+
+
+<!--</div>-->
+
+</body>
+
+<script type="text/javascript">
+
+    function loadUser(id){
+        window.location.href="loadUser.hm?id="+id;
+    }
+    function deleteUser(id) {
+        $("#OK").click(function (){
+            window.location.href = "deleteUser.hm?id="+id;
+        });
+    }
+
+    // 广告弹出框
+    $(".delban").click(function(){
+        $(".banDel").show();
+    });
+
+    $(".updateban").click(function(){
+        $(".banUpdate").show();
+    });
+    $(".close").click(function(){
+        $(".banDel").hide();
+    });
+    $(".no").click(function(){
+        $(".banDel").hide();
+    });
+    $("#cancelUpdate").click(function(){
+        $(".banUpdate").hide();
+    });
+    $(".upClose").click(function(){
+        $(".banUpdate").hide();
+    });
+    // 广告弹出框 end
+</script>
+</html>

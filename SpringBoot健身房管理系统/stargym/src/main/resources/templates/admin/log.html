@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登录-StarGym</title>
+<link rel="stylesheet" type="text/css" href="/css/public.css" />
+<link rel="stylesheet" type="text/css" href="/css/page.css" />
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/public.js"></script>
+</head>
+<body bgcolor="black">
+
+	<!-- 登录页面头部 -->
+	<div class="logHead">
+		<img src="/images/logo-pink.png" />
+	</div>
+	<!-- 登录页面头部结束 -->
+
+	<form action="doLogin.hm" method="post" id="logForm">
+	<!-- 登录body -->
+	<div class="logDiv">
+		<img class="logBanner" src="/images/banner.jpg" />
+		<div class="logGet">
+			<!-- 头部提示信息 -->
+			<div class="logD logDtip">
+				<p class="p1">登录</p>
+				<p class="p2">StarGym后台登录</p>
+			</div>
+			<!-- 输入框 -->
+			<div class="lgD">
+				<img class="img1" src="/img/logName.png" />
+				<input type="text" placeholder="输入用户名" id="username" name="username"/>
+			</div>
+			<div class="lgD">
+				<img class="img1" src="/img/logPwd.png" />
+				<input type="text" placeholder="输入用户密码"  name="password" id="password"/>
+			</div>
+			<div class="lgD logD2">
+				<input class="getYZM" type="text"  id="inputCode"/>
+				<div class="logYZM">
+					<img class="yzm" src="createCode.hm" onclick="this.src='createCode.hm?'+Math.random()"/>
+				</div>
+			</div>
+			<div style="width: 100%;color:red;margin-left: 50px">
+				<span th:text="${msg}" id="loginMsg"></span>
+			</div>
+			<div class="logC">
+				<button>登 录</button>
+				<!--<input type="submit" value="登录"/>-->
+			</div>
+		</div>
+
+	</div>
+	<!-- 登录body  end -->
+	</form>
+	<!-- 登录页面底部 -->
+	<div class="logFoot">
+		<p class="p1" style="color: white">武汉软帝信息科技有限责任公司 ©2018-2020 版权所有</p>
+	</div>
+	<!-- 登录页面底部end -->
+
+<script type="text/javascript">
+    var uFlag=false,pFlag=false,cFlag=false;
+	$("#inputCode").blur(function () {
+		var  code = $("#inputCode").val();
+		if(code==""){
+		    $("#loginMsg").html("请输入验证码");
+
+		}else{
+            $.post(
+                "checkCode.hm",
+                {"code":code},
+                function (data) {
+                    if(!data){
+                        $("#loginMsg").html("验证码错误");
+                    }else{
+						cFlag = true;
+                    }
+                }
+            );
+		}
+    });
+	$("#logForm").submit(function(){
+	    var username = $("#username").val();
+	    var password = $("#password").val();
+
+	    if (username!=""){
+	        uFlag = true;
+		}
+		if (password!=""){
+		    pFlag = true;
+		}
+		if(uFlag&&pFlag&&cFlag){
+		    return true;
+		}else{
+		    $("#loginMsg").html("登录失败，请重新尝试")
+		    return false;
+		}
+
+	});
+</script>
+</body>
+</html>
